@@ -30,4 +30,4 @@ passport.use(new GoogleStrategy({
 
 app.use('/api/auth', authRoutes)
 
-module.exports = app
+export default app
