@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import _config from '../../config/config'
+import _config from '../config/config.js'
 
 async function connectDB() {
     try {
@@ -7,8 +7,13 @@ async function connectDB() {
         await mongoose.connect(_config.MONGO_URI)
         console.log('MongoDB connected')      
     } catch (error) {
-        console.log(error)
+        if (error.cause && error.cause.code === 'ECONNREFUSED') {
+            console.error('Error: Could not connect to MongoDB. Please ensure that the MongoDB server is running on the specified URI.')
+        } else {
+            console.log("MongoDB Connection Error:", error)
+        }
+        process.exit(1)
     }
 }
 
-module.exports = connectDB
+export default connectDB
