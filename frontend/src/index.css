@@ -1,0 +1,309 @@
+/* Global Reset & Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-base);
+  background-color: var(--color-bg-base);
+  color: var(--color-text-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--color-text-base);
+  text-decoration: none;
+  font-weight: var(--font-weight-bold);
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--color-primary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-base);
+}
+
+/* Authentication Pages */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: var(--spacing-md);
+  background: linear-gradient(rgba(0, 0, 0, 0.6), #000);
+}
+
+.auth-card {
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  padding: 40px;
+  /* Kept fixed for visual weight */
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+  box-shadow: var(--shadow-nav);
+}
+
+.auth-card h1 {
+  margin-bottom: var(--spacing-xl);
+  font-size: var(--font-size-2xl);
+  letter-spacing: -0.04em;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  text-align: left;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.form-group label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-base);
+}
+
+.form-group input {
+  padding: 14px;
+  /* Comfortable touch target */
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color-default);
+  background-color: var(--color-bg-input);
+  color: var(--color-text-base);
+  font-size: var(--font-size-md);
+  outline: none;
+  transition: border var(--transition-base), background-color var(--transition-base);
+}
+
+.form-group input:focus {
+  border-color: var(--color-text-base);
+  background-color: var(--color-bg-highlight);
+}
+
+.form-group input:hover {
+  border-color: var(--border-color-hover);
+}
+
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #000000;
+  padding: 14px;
+  border-radius: var(--radius-pill);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-md);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.1s, background-color var(--transition-base);
+  margin-top: var(--spacing-xs);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+  transform: scale(1.02);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  background-color: transparent;
+  color: var(--color-text-base);
+  border: 1px solid var(--color-text-secondary);
+  padding: 14px;
+  border-radius: var(--radius-pill);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  transition: border-color var(--transition-base), transform 0.1s;
+  width: 100%;
+  margin-bottom: var(--spacing-lg);
+}
+
+.btn-google:hover {
+  border-color: var(--color-text-base);
+  transform: scale(1.02);
+}
+
+.btn-google:active {
+  transform: scale(0.98);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: var(--spacing-lg) 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #292929;
+}
+
+.divider::before {
+  margin-right: var(--spacing-sm);
+}
+
+.divider::after {
+  margin-left: var(--spacing-sm);
+}
+
+.auth-footer {
+  margin-top: var(--spacing-xl);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.auth-footer a {
+  color: var(--color-text-base);
+  margin-left: var(--spacing-2xs);
+}
+
+
+/* Split Screen Layout for Auth */
+.split-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--color-bg-base);
+}
+
+.split-visual {
+  display: none;
+  flex: 1;
+  background: linear-gradient(135deg, #121212 0%, #1DB954 100%);
+  position: relative;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-2xl);
+}
+
+/* Abstract shapes for visual interest */
+.split-visual::before {
+  content: '';
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(circle, rgba(29, 185, 84, 0.4) 0%, transparent 60%);
+  top: -25%;
+  left: -25%;
+  filter: blur(60px);
+}
+
+.split-visual-content {
+  position: relative;
+  z-index: 10;
+  color: #fff;
+  max-width: 400px;
+}
+
+.split-form-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-xl);
+  background-color: var(--color-bg-base);
+  overflow-y: auto;
+  max-width: 100%;
+}
+
+.split-form-content {
+  width: 100%;
+  max-width: 420px;
+}
+
+@media (min-width: 900px) {
+  .split-visual {
+    display: flex;
+  }
+}
+
+/* User Type Selector */
+.role-selector {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.role-option {
+  flex: 1;
+  position: relative;
+}
+
+.role-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.role-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--border-color-default);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  height: 100%;
+}
+
+.role-option input[type="radio"]:checked+.role-card {
+  background-color: rgba(29, 185, 84, 0.1);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.role-card:hover {
+  background-color: var(--color-bg-card-hover);
+}
+
+.role-icon {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-xs);
+}
+
+.role-label {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-sm);
+}
+
+/* Overriding auth-container for legacy support if needed, but we use split-layout now */
