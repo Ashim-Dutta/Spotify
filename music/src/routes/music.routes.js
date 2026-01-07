@@ -15,6 +15,9 @@ const router = express.Router();
 router.post('/upload',authMiddleware.authArtistMiddleware,upload.fields([
     {name:'music',maxCount:1},
     {name:'coverImage',maxCount:1}
-]),musicController.uploadMusic)
+]), musicController.uploadMusic)
+
+
+router.get('/artist-musics',authMiddleware.authArtistMiddleware,musicController.getArtistMusic)
 
 export default router

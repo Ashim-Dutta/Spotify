@@ -1,5 +1,7 @@
-import { uploadFile } from "../services/storage.service.js";
+import { uploadFile,getPresignedUrl } from "../services/storage.service.js";
 import musicModel from "../models/music.model.js";
+
+
 
 
 export async function uploadMusic(req, res) {
@@ -13,7 +15,7 @@ export async function uploadMusic(req, res) {
 
         const music = await musicModel.create({
             title:req.body.title,
-            artist:req.user.firstName + " " + req.user.lastName,
+            artist:req.user.fullName.firstName + " " + req.user.fullName.lastName,
             artistId:req.body.artistId,
             musicKey,
             coverImageKey
@@ -21,6 +23,25 @@ export async function uploadMusic(req, res) {
 
         return res.status(201).json({message:"Music uploaded successfully",music})
         
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({message:error.message})
+    }
+}
+
+
+export async function getArtistMusic(req,res){
+    try {
+        const musicsDocs = await musicModel.find({ artistId: req.user.id }).lean()
+
+        const musics = []
+        
+        for (let music of musicsDocs) {
+            music.musicUrl = await getPresignedUrl(music.musicKey)
+            music.coverImageUrl = await getPresignedUrl(music.coverImageKey)
+        }
+
+        return res.status(200).json({musics})
     } catch (error) {
         console.log(error)
         return res.status(500).json({message:error.message})
