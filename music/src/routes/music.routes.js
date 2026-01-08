@@ -13,7 +13,9 @@ const router = express.Router();
 
 
 
-router.get('/',authMiddleware.authUserMiddleware,musicController.getAllMusics)
+router.get('/', authMiddleware.authUserMiddleware, musicController.getAllMusics)
+
+router.get('/get-details/:id', authMiddleware.authUserMiddleware, musicController.getMusicById)
 
 router.post('/upload',authMiddleware.authArtistMiddleware,upload.fields([
     {name:'music',maxCount:1},
@@ -23,6 +25,8 @@ router.post('/upload',authMiddleware.authArtistMiddleware,upload.fields([
 
 router.get('/artist-musics', authMiddleware.authArtistMiddleware, musicController.getArtistMusic)
 
-router.post('/playlist',authMiddleware.authUserMiddleware,musicController.getPlaylist)
+router.post('/playlist', authMiddleware.authUserMiddleware, musicController.getPlaylist)
+
+router.get('/playlist/:id',authMiddleware.authUserMiddleware,musicController.getPlaylistById)
 
 export default router

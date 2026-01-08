@@ -32,6 +32,25 @@ export async function uploadMusic(req, res) {
 }
 
 
+export async function getMusicById(req, res) {
+    const { id } = req.params
+    try {
+        const music = await musicModel.findById(id).lean()
+
+        if (!music) {
+            return res.status(404).json({message:"Music not found"})
+        }
+
+        music.musicUrl = await getPresignedUrl(music.musicKey)
+        music.coverImageUrl = await getPresignedUrl(music.coverImageKey)
+        return res.status(200).json({message:"Music fetched successfully",music})
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({message:error.message})
+    }
+}
+
+
 export async function getAllMusics(req, res) {
 
     const { skip = 0, limit = 10 } = req.query
@@ -117,6 +136,36 @@ export async function getPlaylist(req, res) {
         // }
 
         return res.status(200).json({playlists})
+        
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({message:error.message})
+    }
+}
+
+
+export async function getPlaylistById(req,res){
+    const { id } = req.params
+    try {
+
+        const playlistDoc = await playlistModel.findById(id).lean()
+
+        if (!playlistDoc) {
+            return res.status(404).json({message:"Playlist not found"})
+        }
+
+        const musics = []
+        
+        for (let musicId of playlistDoc.musics) {
+            const music = await musicModel.findById(musicId).lean()
+            music.musicUrl = await getPresignedUrl(music.musicKey)
+            music.coverImageUrl = await getPresignedUrl(music.coverImageKey)
+            musics.push(music)
+        }
+
+        playlistDoc.musics = musics
+
+        return res.status(200).json({playlistDoc})
         
     } catch (error) {
         console.log(error)
