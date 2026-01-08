@@ -32,6 +32,32 @@ export async function uploadMusic(req, res) {
 }
 
 
+export async function getAllMusics(req, res) {
+
+    const { skip = 0, limit = 10 } = req.query
+    
+
+    try {
+        const musicsDocs = await musicModel.find().skip(skip).limit(limit).lean()
+
+        const musics = []
+        
+        for (let music of musicsDocs) {
+            music.musicUrl = await getPresignedUrl(music.musicKey)
+            music.coverImageUrl = await getPresignedUrl(music.coverImageKey)
+            musics.push(music)
+        }
+
+        return res.status(200).json({message:"Musics fetched successfully",musics})
+        
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({message:error.message})
+    }
+
+}
+
+
 export async function getArtistMusic(req,res){
     try {
         const musicsDocs = await musicModel.find({ artistId: req.user.id }).lean()
@@ -57,6 +83,8 @@ export async function createPlaylist(req, res) {
     try {
 
         const playlist = await playlistModel.create({
+            artist:req.user.fullName.firstName + " " + req.user.fullName.lastName,
+            artistId:req.user.id,
             title,
             userId:req.user.id,
             musics
@@ -69,5 +97,29 @@ export async function createPlaylist(req, res) {
         console.log(error)
         return res.status(500).json({message:error.message})
         
+    }
+}
+
+
+export async function getPlaylist(req, res) {
+    try {
+
+        const playlists = await playlistModel.find({
+            artistId:req.user.id
+        })
+
+
+        // for (let playlist of playlists) {
+        //     for (let music of playlist.musics) {
+        //         music.musicUrl = await getPresignedUrl(music.musicKey);
+        //         music.coverImageUrl = await getPresignedUrl(music.coverImageKey);
+        //     }
+        // }
+
+        return res.status(200).json({playlists})
+        
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({message:error.message})
     }
 }

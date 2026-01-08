@@ -12,6 +12,9 @@ const upload = multer({
 const router = express.Router();
 
 
+
+router.get('/',authMiddleware.authUserMiddleware,musicController.getAllMusics)
+
 router.post('/upload',authMiddleware.authArtistMiddleware,upload.fields([
     {name:'music',maxCount:1},
     {name:'coverImage',maxCount:1}
@@ -20,6 +23,6 @@ router.post('/upload',authMiddleware.authArtistMiddleware,upload.fields([
 
 router.get('/artist-musics', authMiddleware.authArtistMiddleware, musicController.getArtistMusic)
 
-router.post('/playlist',authMiddleware.authArtistMiddleware,musicController.createPlaylist)
+router.post('/playlist',authMiddleware.authUserMiddleware,musicController.getPlaylist)
 
 export default router
