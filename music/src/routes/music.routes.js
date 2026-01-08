@@ -18,6 +18,8 @@ router.post('/upload',authMiddleware.authArtistMiddleware,upload.fields([
 ]), musicController.uploadMusic)
 
 
-router.get('/artist-musics',authMiddleware.authArtistMiddleware,musicController.getArtistMusic)
+router.get('/artist-musics', authMiddleware.authArtistMiddleware, musicController.getArtistMusic)
+
+router.post('/playlist',authMiddleware.authArtistMiddleware,musicController.createPlaylist)
 
 export default router

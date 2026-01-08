@@ -1,5 +1,7 @@
 import { uploadFile,getPresignedUrl } from "../services/storage.service.js";
 import musicModel from "../models/music.model.js";
+import playlistModel from "../models/playlist.model.js";
+
 
 
 
@@ -45,5 +47,27 @@ export async function getArtistMusic(req,res){
     } catch (error) {
         console.log(error)
         return res.status(500).json({message:error.message})
+    }
+}
+
+
+export async function createPlaylist(req, res) {
+    const { title, musics } = req.body
+    
+    try {
+
+        const playlist = await playlistModel.create({
+            title,
+            userId:req.user.id,
+            musics
+        })
+
+        return res.status(201).json({message:"Playlist created successfully",playlist})
+        
+    } catch (error) {
+
+        console.log(error)
+        return res.status(500).json({message:error.message})
+        
     }
 }
