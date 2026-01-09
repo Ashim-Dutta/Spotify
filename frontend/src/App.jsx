@@ -2,11 +2,13 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import ArtistDashboard from './pages/ArtistDashboard';
 
 const Home = () => (
   <div style={{ padding: '2rem', textAlign: 'center' }}>
     <h1>Welcome to Spotify Clone</h1>
     <p>This is the home page. Please <a href="/login">login</a> or <a href="/register">register</a>.</p>
+    <p><a href="/artist/dashboard">Go to Artist Dashboard</a></p>
   </div>
 );
 
@@ -17,6 +19,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/artist/dashboard" element={<ArtistDashboard />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>

@@ -1,0 +1,107 @@
+.playlist-card {
+    background-color: var(--color-bg-card);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    border: 1px solid var(--border-color-default);
+    transition: background-color var(--transition-base), border-color var(--transition-base);
+    display: flex;
+    flex-direction: column;
+}
+
+.playlist-card:hover {
+    background-color: var(--color-bg-card-hover);
+    border-color: var(--border-color-hover);
+}
+
+.playlist-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.playlist-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xs);
+}
+
+.playlist-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-base);
+    margin: 0;
+}
+
+.playlist-meta {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+.expand-button {
+    background: transparent;
+    border: none;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-lg);
+    cursor: pointer;
+    transition: color var(--transition-fast);
+}
+
+.expand-button:hover {
+    color: var(--color-text-base);
+}
+
+.playlist-tracks {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--color-bg-input);
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.track-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.track-item {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-xs) 0;
+    color: var(--color-text-subdued);
+    font-size: var(--font-size-sm);
+    transition: color var(--transition-fast);
+}
+
+.track-item:hover {
+    color: var(--color-text-base);
+}
+
+.track-number {
+    width: 30px;
+    color: var(--color-text-secondary);
+    font-family: var(--font-family-code);
+}
+
+.track-name {
+    flex: 1;
+}
+
+.no-tracks {
+    color: var(--color-text-subdued);
+    font-style: italic;
+    font-size: var(--font-size-sm);
+}

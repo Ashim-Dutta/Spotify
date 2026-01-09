@@ -1,0 +1,104 @@
+.music-card {
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  transition: background-color var(--transition-base), transform var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.music-card:hover {
+  background-color: var(--color-bg-card-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.music-card-image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1; /* Square aspect ratio */
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.music-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.music-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.music-card:hover .music-card-overlay {
+  opacity: 1;
+}
+
+.play-button {
+  background-color: var(--color-primary);
+  color: #000;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--font-size-lg);
+  cursor: pointer;
+  transform: scale(0.9);
+  transition: transform var(--transition-fast), background-color var(--transition-base);
+  box-shadow: var(--shadow-md);
+}
+
+.play-button:hover {
+  transform: scale(1.05);
+  background-color: var(--color-primary-hover);
+}
+
+.music-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.music-card-title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-base);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.music-card-artist {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.music-card-audio {
+  width: 100%;
+  margin-top: auto;
+  height: 32px;
+}

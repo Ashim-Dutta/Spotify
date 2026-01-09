@@ -1,0 +1,91 @@
+.artist-dashboard-container {
+    padding: var(--spacing-xl);
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background-color: var(--color-bg-base);
+    color: var(--color-text-base);
+}
+
+.dashboard-header {
+    margin-bottom: var(--spacing-2xl);
+    border-bottom: 1px solid var(--color-bg-input);
+    padding-bottom: var(--spacing-lg);
+}
+
+.dashboard-title {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-2xs);
+    letter-spacing: -0.04em;
+}
+
+.dashboard-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+.dashboard-section {
+    margin-bottom: var(--spacing-3xl);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.section-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    margin: 0;
+}
+
+.add-btn {
+    background-color: transparent;
+    border: 1px solid var(--color-text-secondary);
+    color: var(--color-text-base);
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-sm);
+    transition: all var(--transition-base);
+}
+
+.add-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    transform: scale(1.05);
+}
+
+/* Grids */
+.music-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .artist-dashboard-container {
+        padding: var(--spacing-md);
+    }
+
+    .music-grid,
+    .playlist-grid {
+        grid-template-columns: 1fr;
+        /* Stack on mobile */
+    }
+
+    .dashboard-title {
+        font-size: var(--font-size-2xl);
+    }
+}
